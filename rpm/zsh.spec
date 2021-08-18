@@ -58,9 +58,9 @@ rm -rf %{buildroot}
 # %%make_install
 # do it manually instead:
 make DESTDIR=%{buildroot} install.bin
-rm %{buildroot}%{_bindir}/zsh-%{version}
-mkdir -p %{buildroot}/bin/
-ln -s %{_bindir}/%{name} %{buildroot}/bin/%{name}
+rm %{buildroot}%{_bindir}/zsh-*
+mkdir -p "%{buildroot}/bin/"
+ln -s "%{_bindir}/%{name}" "%{buildroot}/bin/%{name}"
 
 make DESTDIR=%{buildroot} install.modules
 make DESTDIR=%{buildroot} install.fns
