@@ -1,6 +1,8 @@
 Name:       zsh
 Summary:    The Z shell
-Version:    5.8
+# define own version because sometimes OBS fiddles with %%{version}
+%define upstream_version 5.8
+Version:    %{upstream_version}
 Release:    1%{?dist}
 Group:      Applications/System
 License:    MIT
@@ -73,7 +75,7 @@ make DESTDIR=%{buildroot} install.fns
 %defattr(-,root,root,-)
 %{_bindir}/%{name}
 %{_libdir}/%{name}/
-%{_datadir}/%{name}/%{version}/*
+%{_datadir}/%{name}/%{upstream_version}/*
 /bin/%{name}
 
 %post
