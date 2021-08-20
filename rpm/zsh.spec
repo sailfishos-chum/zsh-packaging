@@ -8,6 +8,7 @@ Group:      Applications/System
 License:    MIT
 URL:        https://git.code.sf.net/p/zsh/code
 Source0:    %{name}-%{version}.tar.bz2
+
 BuildRequires: pkgconfig(ncursesw)
 BuildRequires: pkgconfig(libpcre)
 BuildRequires: gcc
@@ -41,10 +42,15 @@ history mechanism.
 
 %build
 ./Util/preconfig
-
+export CPPFLAGS="$CPPFLAGS -D_FORTIFY_SOURCE=2"
+export CFLAGS="$CFLAGS -fPIE -fstack-protector-strong -fstack-clash-protection"
+export LIBLDFLAGS="-z lazy"
+export EXELDFLAGS="-pie"
 %configure \
   --with-tcsetpgrp \
-  --enable-pcre
+  --enable-pcre \
+  --enable-site-fndir=/usr/local/share/zsh/site-functions \
+  --enable-ldflags="-g -Wl,-z,relro,-z,now -Wl,--as-needed"
 
 # TODO doc fails to build because of missing dependency groff
 %make_build all
@@ -74,9 +80,9 @@ make DESTDIR=%{buildroot} install.fns
 %files
 %defattr(-,root,root,-)
 %{_bindir}/%{name}
+/bin/%{name}
 %{_libdir}/%{name}/
 %{_datadir}/%{name}/%{upstream_version}/*
-/bin/%{name}
 
 %post
 if [ "$1" -eq 1 ]; then
