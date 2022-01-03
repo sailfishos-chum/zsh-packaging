@@ -6,7 +6,7 @@ Version:    %{upstream_version}
 Release:    1%{?dist}
 Group:      Applications/System
 License:    MIT
-URL:        https://git.code.sf.net/p/zsh/code
+URL:        https://zsh.sourceforge.io/
 Source0:    %{name}-%{version}.tar.bz2
 
 BuildRequires: pkgconfig(ncursesw)
@@ -24,18 +24,26 @@ Requires(postun): coreutils
 
 Provides: /bin/zsh
 
-%description
-Zsh is a UNIX command interpreter (shell) usable as an interactive login shell
-and as a shell script command processor. Of the standard shells, zsh most
-closely resembles the Korn shell (ksh), but includes many enhancements.  Among
-these features are command line editing, built-in spelling correction, 
-programmable command completion, shell functions (with autoloading), and a 
-history mechanism.
-
 %define source_date_epoch_from_changelog 1
 %define clamp_mtime_to_source_date_epoch 1
 %define use_source_date_epoch_as_buildtime 1
 %define _buildhost SailfishSDK
+
+%description
+Zsh is a UNIX command interpreter (shell) usable as an interactive login shell
+and as a shell script command processor. Of the standard shells, zsh most
+closely resembles the Korn shell (ksh), but includes many enhancements.  Among
+these features are command line editing, built-in spelling correction,
+programmable command completion, shell functions (with autoloading), and a
+history mechanism.
+
+PackageName: Z Shell
+Type: console-application
+Custom:
+  Repo: https://github.com/sailfishos-chum/zsh-packaging
+Categories:
+  - System
+  - Utility
 
 %prep
 %autosetup -n %{name}-%{version}/zsh
