@@ -1,9 +1,9 @@
 Name:       zsh
 Summary:    The Z shell
 # define own version because sometimes OBS fiddles with %%{version}
-%define upstream_version 5.8
+%define upstream_version 5.8.1
 Version:    %{upstream_version}
-Release:    1%{?dist}
+Release:    2%{?dist}
 Group:      Applications/System
 License:    MIT
 URL:        https://zsh.sourceforge.io/
@@ -50,7 +50,7 @@ Categories:
 
 %build
 ./Util/preconfig
-export CPPFLAGS="$CPPFLAGS -D_FORTIFY_SOURCE=2"
+export CPPFLAGS="$CPPFLAGS -O -D_FORTIFY_SOURCE=2"
 export CFLAGS="$CFLAGS -fPIE -fstack-protector-strong -fstack-clash-protection"
 export LIBLDFLAGS="-z lazy"
 export EXELDFLAGS="-pie"
@@ -66,7 +66,7 @@ export EXELDFLAGS="-pie"
 %check
 # Run the testsuite
 
-# fails on aarch64 but not on x86 due to different build env(?)
+# fails (locally, not on OBS) on aarch64 but not on x86 due to different build env(?)
 # TODO investigate, test is expected to fail, but passes
 mv Test/D02glob.ztst Test/disable_D02glob_ztst
 make check
