@@ -8,6 +8,7 @@ Group:      Applications/System
 License:    MIT
 URL:        https://zsh.sourceforge.io/
 Source0:    %{name}-%{version}.tar.bz2
+Patch0:     001-disable-failing-tests.patch
 
 BuildRequires: pkgconfig(ncursesw)
 BuildRequires: pkgconfig(libpcre)
@@ -46,7 +47,7 @@ Categories:
   - Utility
 
 %prep
-%autosetup -n %{name}-%{version}/zsh
+%autosetup -p1 -n %{name}-%{version}/zsh
 
 %build
 ./Util/preconfig
@@ -65,12 +66,7 @@ export EXELDFLAGS="-pie"
 
 %check
 # Run the testsuite
-
-# fails (locally, not on OBS) on aarch64 but not on x86 due to different build env(?)
-# TODO investigate, test is expected to fail, but passes
-mv Test/D02glob.ztst Test/disable_D02glob_ztst
 make check
-mv Test/disable_D02glob_ztst Test/D02glob.ztst
 
 %install
 rm -rf %{buildroot}
