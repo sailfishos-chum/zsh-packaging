@@ -1,5 +1,0 @@
-* Mon Feb 14 2022 takimata <takimata@gmx.de> - 5.8.1-2
-- Security and bugfix release
-- PROMPT_SUBST expansion is no longer performed on arguments to prompt expansion sequences such as %F
-* Wed Aug 18 2021 takimata <takimata@gmx.de> - 5.8-1
-- Initial packaging for Chum

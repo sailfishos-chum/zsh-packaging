@@ -1,9 +1,9 @@
 Name:       zsh
 Summary:    The Z shell
 # define own version because sometimes OBS fiddles with %%{version}
-%define upstream_version 5.8.1
+%define upstream_version 5.9
 Version:    %{upstream_version}
-Release:    2%{?dist}
+Release:    1%{?dist}
 Group:      Applications/System
 License:    MIT
 URL:        https://zsh.sourceforge.io/
@@ -38,13 +38,19 @@ these features are command line editing, built-in spelling correction,
 programmable command completion, shell functions (with autoloading), and a
 history mechanism.
 
+%if "%{?vendor}" == "chum"
 PackageName: Z Shell
 Type: console-application
 Custom:
   Repo: https://github.com/sailfishos-chum/zsh-packaging
+Url:
+  Homepage: https://zsh.sourceforge.io
 Categories:
   - System
   - Utility
+PackagerName: takimata
+Icon: https://github.com/Zsh-art/logo/raw/main/png/color_vertical_icon.png
+%endif
 
 %prep
 %autosetup -p1 -n %{name}-%{version}/zsh
@@ -104,3 +110,12 @@ if [ "$1" -eq 0 ] && [ -f %{_sysconfdir}/shells ]; then
   sed -i '\!^%{_bindir}/%{name}$!dq' %{_sysconfdir}/shells
   sed -i '\!^/bin/%{name}$!dq' %{_sysconfdir}/shells
 fi
+
+%changelog
+* Thu May 19 2022 takimata <takimata@gmx.de> - 5.9-1
+- Stable security release with many bug fixes and several new features
+* Mon Feb 14 2022 takimata <takimata@gmx.de> - 5.8.1-2
+- Security and bugfix release
+- PROMPT_SUBST expansion is no longer performed on arguments to prompt expansion sequences such as %F
+* Wed Aug 18 2021 takimata <takimata@gmx.de> - 5.8-1
+- Initial packaging for Chum
