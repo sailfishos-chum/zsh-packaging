@@ -1,3 +1,25 @@
+--- a/Test/A05execution.ztst
++++ b/Test/A05execution.ztst
+@@ -24,6 +24,11 @@
+   chmod 755 tstcmd dir1/tstcmd dir2/tstcmd
+   chmod 755 tstcmd-slashless tstcmd-arg tstcmd-interp-too-long
+   chmod 755 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxn
++  if [[ "$USER" == "mersdk" ]]; then
++    SFDK_SKIP_SOME_TESTS="Test fails in 5% of all runs"
++  else
++    SFDK_SKIP_SOME_TESTS=
++  fi
+ 
+ %test
+   ./tstcmd
+@@ -356,6 +361,7 @@ F:anonymous function, and a descriptor leak when backgrounding a pipeline
+   wait %foo
+   echo $?
+   wait %\?bar
++  ZTST_skip=${SFDK_SKIP_SOME_TESTS}
+ 127:'wait' exit status and warning for unknown ID
+ >127
+ >127
 --- a/Test/B13whence.ztst
 +++ b/Test/B13whence.ztst
 @@ -15,9 +15,15 @@
@@ -176,3 +198,25 @@
  0:zsystem flock successful wait test, fractional seconds
  ?elapsed time seems OK
  F:This timing test might fail due to process scheduling issues unrelated to zsh.
+--- a/Test/W02jobs.ztst
++++ b/Test/W02jobs.ztst
+@@ -30,6 +30,11 @@
+   else
+     ZTST_unimplemented='the zsh/zpty module is not available'
+   fi
++  if [[ "$USER" == "mersdk" ]]; then
++    SFDK_SKIP_SOME_TESTS="Test fails in 5% of all runs"
++  else
++    SFDK_SKIP_SOME_TESTS=
++  fi
+ 
+ %test
+ 
+@@ -183,6 +188,7 @@
+   zpty_input 'kill -KILL %1'
+   zpty_line
+   zpty_stop
++  ZTST_skip=${SFDK_SKIP_SOME_TESTS}
+ 0:various `kill` signals with multiple running jobs
+ *>\[1] [0-9]##
+ *>\[2] [0-9]##
