@@ -12,14 +12,14 @@
  
  %test
    ./tstcmd
-@@ -356,6 +361,7 @@ F:anonymous function, and a descriptor leak when backgrounding a pipeline
-   wait %foo
-   echo $?
-   wait %\?bar
+@@ -343,6 +348,7 @@ F:anonymous function, and a descriptor leak when backgrounding a pipeline
+ >19
+ 
+ # Test 'wait' for unknown job/process ID.
 +  ZTST_skip=${SFDK_SKIP_SOME_TESTS}
- 127:'wait' exit status and warning for unknown ID
- >127
- >127
+   wait 1
+   echo $?
+   wait %%
 --- a/Test/B13whence.ztst
 +++ b/Test/B13whence.ztst
 @@ -15,9 +15,15 @@
