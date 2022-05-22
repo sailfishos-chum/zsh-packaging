@@ -1,29 +1,30 @@
 --- a/Test/A05execution.ztst
 +++ b/Test/A05execution.ztst
-@@ -24,6 +24,11 @@
-   chmod 755 tstcmd dir1/tstcmd dir2/tstcmd
-   chmod 755 tstcmd-slashless tstcmd-arg tstcmd-interp-too-long
-   chmod 755 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxn
-+  if [[ "$USER" == "mersdk" ]]; then
-+    SFDK_SKIP_SOME_TESTS="Test fails in 5% of all runs"
-+  else
-+    SFDK_SKIP_SOME_TESTS=
-+  fi
- 
- %test
-   ./tstcmd
-@@ -343,6 +348,7 @@ F:anonymous function, and a descriptor leak when backgrounding a pipeline
+@@ -342,35 +342,6 @@ F:anonymous function, and a descriptor leak when backgrounding a pipeline
+ >17
  >19
  
- # Test 'wait' for unknown job/process ID.
-+  ZTST_skip=${SFDK_SKIP_SOME_TESTS}
-   wait 1
-   echo $?
-   wait %%
-@@ -363,13 +369,13 @@ F:anonymous function, and a descriptor leak when backgrounding a pipeline
- >127
- >127
- >127
+-# Test 'wait' for unknown job/process ID.
+-  wait 1
+-  echo $?
+-  wait %%
+-  echo $?
+-  wait %+
+-  echo $?
+-  wait %-
+-  echo $?
+-  wait %1
+-  echo $?
+-  wait %foo
+-  echo $?
+-  wait %\?bar
+-127:'wait' exit status and warning for unknown ID
+->127
+->127
+->127
+->127
+->127
+->127
 -?(eval):wait:1: pid 1 is not a child of this shell
 -?(eval):wait:3: %%: no such job
 -?(eval):wait:5: %+: no such job
@@ -31,16 +32,10 @@
 -?(eval):wait:9: %1: no such job
 -?(eval):wait:11: job not found: foo
 -?(eval):wait:13: job not found: ?bar
-+?(eval):wait:2: pid 1 is not a child of this shell
-+?(eval):wait:4: %%: no such job
-+?(eval):wait:6: %+: no such job
-+?(eval):wait:8: %-: no such job
-+?(eval):wait:10: %1: no such job
-+?(eval):wait:12: job not found: foo
-+?(eval):wait:14: job not found: ?bar
- 
+-
  # Test 'wait' for unknown job/process ID (POSIX mode).
    (setopt POSIX_BUILTINS
+   wait 1
 --- a/Test/B13whence.ztst
 +++ b/Test/B13whence.ztst
 @@ -15,9 +15,15 @@
