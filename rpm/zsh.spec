@@ -64,7 +64,7 @@ export EXELDFLAGS="-pie"
 %configure \
   --with-tcsetpgrp \
   --enable-pcre \
-  --enable-site-fndir=/usr/local/share/zsh/site-functions \
+  --enable-site-fndir=%{_datadir}/zsh/site-functions \
   --enable-ldflags="-g -Wl,-z,relro,-z,now -Wl,--as-needed"
 
 # TODO doc fails to build because of missing dependency groff
@@ -87,12 +87,18 @@ ln -s "%{_bindir}/%{name}" "%{buildroot}/bin/%{name}"
 make DESTDIR=%{buildroot} install.modules
 make DESTDIR=%{buildroot} install.fns
 
+# avoid invalid Requires to be generated
+for f in test-repo-git-rebase-{apply,merge}; do
+    sed -i -e 's!/usr/local/bin/zsh!%{_bindir}/zsh!' $RPM_BUILD_ROOT%{_datadir}/zsh/%{version}/functions/$f
+    chmod +x $RPM_BUILD_ROOT%{_datadir}/zsh/%{version}/functions/$f
+done
+
 %files
 %defattr(-,root,root,-)
 %{_bindir}/%{name}
 /bin/%{name}
 %{_libdir}/%{name}/
-%{_datadir}/%{name}/%{upstream_version}/*
+%{_datadir}/%{name}
 
 %post
 if [ "$1" -eq 1 ]; then
