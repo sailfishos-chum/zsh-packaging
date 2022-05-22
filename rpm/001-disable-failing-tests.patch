@@ -221,23 +221,11 @@
  F:This timing test might fail due to process scheduling issues unrelated to zsh.
 --- a/Test/W02jobs.ztst
 +++ b/Test/W02jobs.ztst
-@@ -30,6 +30,11 @@
-   else
-     ZTST_unimplemented='the zsh/zpty module is not available'
-   fi
-+  if [[ "$USER" == "mersdk" ]]; then
-+    SFDK_SKIP_SOME_TESTS="Test fails in 5% of all runs"
-+  else
-+    SFDK_SKIP_SOME_TESTS=
-+  fi
- 
- %test
- 
-@@ -183,6 +188,7 @@
+@@ -183,6 +183,7 @@
    zpty_input 'kill -KILL %1'
    zpty_line
    zpty_stop
-+  ZTST_skip=${SFDK_SKIP_SOME_TESTS}
++  ZTST_skip="Test fails in 5% of all runs"
  0:various `kill` signals with multiple running jobs
  *>\[1] [0-9]##
  *>\[2] [0-9]##
