@@ -89,8 +89,8 @@ make DESTDIR=%{buildroot} install.fns
 
 # avoid invalid Requires to be generated
 for f in test-repo-git-rebase-{apply,merge}; do
-    sed -i -e 's!/usr/local/bin/zsh!%{_bindir}/zsh!' $RPM_BUILD_ROOT%{_datadir}/zsh/%{version}/functions/$f
-    chmod +x $RPM_BUILD_ROOT%{_datadir}/zsh/%{version}/functions/$f
+    sed -i -e 's!/usr/local/bin/zsh!%{_bindir}/zsh!' $RPM_BUILD_ROOT%{_datadir}/zsh/%{upstream_version}/functions/$f
+    chmod +x $RPM_BUILD_ROOT%{_datadir}/zsh/%{upstream_version}/functions/$f
 done
 
 %files
