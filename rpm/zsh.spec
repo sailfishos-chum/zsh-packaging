@@ -8,7 +8,8 @@ Group:      Applications/System
 License:    MIT
 URL:        https://zsh.sourceforge.io/
 Source0:    %{name}-%{version}.tar.bz2
-Patch0:     001-disable-failing-tests.patch
+Patch1:     001-disable-failing-tests.patch
+Patch2:     002-no-egrep-in-tests.patch
 
 BuildRequires: pkgconfig(ncursesw)
 BuildRequires: pkgconfig(libpcre)
