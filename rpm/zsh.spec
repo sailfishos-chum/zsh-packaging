@@ -38,12 +38,12 @@ these features are command line editing, built-in spelling correction,
 programmable command completion, shell functions (with autoloading), and a
 history mechanism.
 
-%if "%{?vendor}" == "chum"
-PackageName: Z Shell
+%if 0%{?_chum}
+Title: Z Shell
 Type: console-application
 Custom:
-  Repo: https://github.com/sailfishos-chum/zsh-packaging
-Url:
+  PackagingRepo: https://github.com/sailfishos-chum/zsh-packaging
+Links:
   Homepage: https://zsh.sourceforge.io
 Categories:
   - System
