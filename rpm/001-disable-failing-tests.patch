@@ -1,3 +1,5 @@
+diff --git a/Test/A05execution.ztst b/Test/A05execution.ztst
+index d95ee36..1b83804 100644
 --- a/Test/A05execution.ztst
 +++ b/Test/A05execution.ztst
 @@ -342,35 +342,6 @@ F:anonymous function, and a descriptor leak when backgrounding a pipeline
@@ -36,6 +38,8 @@
  # Test 'wait' for unknown job/process ID (POSIX mode).
    (setopt POSIX_BUILTINS
    wait 1
+diff --git a/Test/B13whence.ztst b/Test/B13whence.ztst
+index 3b35835..310dc25 100644
 --- a/Test/B13whence.ztst
 +++ b/Test/B13whence.ztst
 @@ -15,9 +15,15 @@
@@ -54,6 +58,8 @@
    (
      path=( ${PWD:P}/whence.tmp $path )
      whence -S step1
+diff --git a/Test/C02cond.ztst b/Test/C02cond.ztst
+index 4366b41..18eb2c2 100644
 --- a/Test/C02cond.ztst
 +++ b/Test/C02cond.ztst
 @@ -43,6 +43,14 @@
@@ -95,6 +101,8 @@
    [[ -G zerolength ]]
  0:-G cond
  
+diff --git a/Test/D02glob.ztst b/Test/D02glob.ztst
+index 850a535..cbfab06 100644
 --- a/Test/D02glob.ztst
 +++ b/Test/D02glob.ztst
 @@ -19,6 +19,12 @@
@@ -126,6 +134,8 @@
  0:glob files in readable directories inside unreadable directories
  >glob.tmp/secret-d111/dir/file  glob.tmp/secret-s111/dir/file
  
+diff --git a/Test/D04parameter.ztst b/Test/D04parameter.ztst
+index 6bf55b4..6a1f55d 100644
 --- a/Test/D04parameter.ztst
 +++ b/Test/D04parameter.ztst
 @@ -1201,39 +1201,6 @@
@@ -168,6 +178,8 @@
  
    typeset -T tied1 tied2 +
    typeset -T tied2 tied1 +
+diff --git a/Test/V14system.ztst b/Test/V14system.ztst
+index 8125332..9f87d51 100644
 --- a/Test/V14system.ztst
 +++ b/Test/V14system.ztst
 @@ -9,6 +9,11 @@
@@ -214,6 +226,8 @@
  0:zsystem flock successful wait test, fractional seconds
  ?elapsed time seems OK
  F:This timing test might fail due to process scheduling issues unrelated to zsh.
+diff --git a/Test/W02jobs.ztst b/Test/W02jobs.ztst
+index d52888d..bd12300 100644
 --- a/Test/W02jobs.ztst
 +++ b/Test/W02jobs.ztst
 @@ -183,6 +183,7 @@
