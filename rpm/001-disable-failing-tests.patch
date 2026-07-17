@@ -59,7 +59,7 @@ index 3b35835..310dc25 100644
      path=( ${PWD:P}/whence.tmp $path )
      whence -S step1
 diff --git a/Test/C02cond.ztst b/Test/C02cond.ztst
-index 4366b41..abb04d4 100644
+index 4366b41..da42c4e 100644
 --- a/Test/C02cond.ztst
 +++ b/Test/C02cond.ztst
 @@ -43,6 +43,16 @@
@@ -95,7 +95,11 @@ index 4366b41..abb04d4 100644
    if (( EUID == 0 )); then
      print -u$ZTST_fd 'Warning: Not testing [[ ! -r file ]] (root reads anything)'
      [[ -r zerolength && -r unmodish ]]
-@@ -128,6 +140,7 @@
+@@ -125,9 +137,11 @@
+ 
+ # no simple way of guaranteeing test for -t
+ 
++  ZTST_skip=${SFDK_SKIP_SOME_TESTS}
    [[ -u modish && ! -u zerolength ]]
  0:-u cond
  
@@ -103,7 +107,7 @@ index 4366b41..abb04d4 100644
    [[ -x cmd.exe && ! -x zerolength ]]
  0:-x cond
  
-@@ -141,6 +154,7 @@
+@@ -141,6 +155,7 @@
    [[ -O zerolength ]]
  0:-O cond
  
